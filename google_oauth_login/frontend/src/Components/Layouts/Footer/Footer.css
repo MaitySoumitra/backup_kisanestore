@@ -1,0 +1,61 @@
+.btm-ftr{
+    background-color:#E0F6F9;
+    padding:32px 50px 10px 50px!important;
+    
+}
+.fw-bold-kisan-label{
+    font-weight: 600;
+    font-size:30px;
+    line-height: 30px;
+    padding-bottom: 1rem !important;
+}
+.btm-ctg-title{
+    line-height: 20px;
+    font-size: 22px;
+    font-weight: 700;
+    color:#4AAE37;
+}
+.text-muted-product{
+    padding-left: 16px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+}
+.cntr-line-product{
+    margin: 15px 0px 15px 0px;
+    color: #000000;
+}
+.btm-view-all-ctg{
+    color:#4AAE37;
+    font-size: 22px;
+    line-height: 20px;
+    font-weight: 700;
+    margin: 0;
+    text-decoration: underline;
+}
+.ftr-benefits-frm{
+    padding-top: 50px;
+    font-size: 30px;
+    line-height: 30px;
+    font-weight: 600;
+}
+.text-muted-bullet-title, .text-muted-bullet li::marker{
+    color:#4AAE37; 
+}
+.txt-bullet-benefit{
+    font-size:16px;
+    font-weight: 500px !important;
+    line-height: 20px;
+}
+.text-muted-bullet-title {
+    display: block;          /* Ensure it’s treated as a block-level element */
+    margin-bottom: 10px;     /* Space between the title and the description */
+  }
+  
+  .text-muted-bullet p {
+    display: block;          /* Ensures the paragraph stays on its own line */
+    margin-top: 0;            /* Remove any default top margin from <p> */
+    color: #333;             /* Optional: change text color */
+  }
+  
+  
