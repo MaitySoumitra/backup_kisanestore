@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Successful</title>
+    <style>
+        body { 
+            font-family: sans-serif; 
+            text-align: center; 
+            padding-top: 50px; 
+            background: #f8f8f8; 
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .success-card, .debug-card { 
+            background: white; 
+            padding: 30px; 
+            border-radius: 10px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+            max-width: 500px; 
+            margin: 0 auto 30px auto; 
+        }
+        .debug-card {
+            max-width: 800px;
+            text-align: left;
+        }
+        .success-icon { 
+            color: #2ecc71; 
+            font-size: 48px; 
+            margin-bottom: 20px; 
+        }
+        .details { 
+            text-align: left; 
+            background: #f8f9fa; 
+            padding: 15px; 
+            border-radius: 5px; 
+            margin-top: 20px; 
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .debug-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            border-left: 4px solid #28a745;
+        }
+        .debug-section h4 {
+            margin-top: 0;
+            color: #333;
+        }
+        .code {
+            background: #f1f1f1;
+            padding: 10px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            word-break: break-all;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .json-pretty {
+            background: #f1f1f1;
+            padding: 10px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .toggle-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+        .toggle-btn:hover {
+            background: #5a6268;
+        }
+        .success-highlight {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .info-highlight {
+            color: #17a2b8;
+            font-weight: bold;
+        }
+        .debug-toggle {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #6c757d;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+        .debug-toggle:hover {
+            background-color: #5a6268;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-card">
+            <div class="success-icon">✓</div>
+            <h1>Payment Successful!</h1>
+            <p>Your payment has been processed successfully.</p>
+            <div class="details">
+                <h3>Transaction Details:</h3>
+                <p><strong>Transaction ID:</strong> <%= transactionId %></p>
+                <% if (cscTxn && cscTxn !== 'N/A') { %>
+                <p><strong>CSC Transaction ID:</strong> <%= cscTxn %></p>
+                <% } %>
+                <p><strong>Amount:</strong> ₹<%= amount %></p>
+                <p><strong>Status:</strong> <%= status || 'Success' %></p>
+            </div>
+            <a href="/" class="btn">Back to Home</a>
+            
+            <% if (debugInfo) { %>
+            <button class="debug-toggle" onclick="toggleDebug()">Show Debug Info</button>
+            <% } %>
+        </div>
+
+        <% if (debugInfo) { %>
+        <div class="debug-card hidden" id="debug-info">
+            <h2>Debug Information</h2>
+            <p><em>This information shows the successful payment processing details.</em></p>
+            
+            <div class="debug-section">
+                <h4>📥 Raw Gateway Response</h4>
+                <div class="json-pretty"><%= JSON.stringify(debugInfo.rawResponse, null, 2) %></div>
+            </div>
+
+            <div class="debug-section">
+                <h4>🔐 Encrypted Message</h4>
+                <p><strong>Length:</strong> <%= debugInfo.encryptedMessage.length %> characters</p>
+                <div class="code" id="encrypted-msg"><%= debugInfo.encryptedMessage.substring(0, 100) %>...</div>
+                <button class="toggle-btn" onclick="toggleContent('encrypted-msg', '<%= debugInfo.encryptedMessage %>')">Show Full</button>
+            </div>
+
+            <div class="debug-section">
+                <h4>🔓 Decrypted Message</h4>
+                <p class="success-highlight">✅ Decryption successful</p>
+                <div class="code"><%= debugInfo.decryptedMessage %></div>
+            </div>
+
+            <div class="debug-section">
+                <h4>📊 Parsed Data</h4>
+                <p class="success-highlight">✅ Parsing successful</p>
+                <div class="json-pretty"><%= JSON.stringify(debugInfo.parsedData, null, 2) %></div>
+            </div>
+
+            <div class="debug-section">
+                <h4>✅ Status Verification</h4>
+                <p class="success-highlight">✅ Transaction status verified as successful</p>
+                <p><strong>Status Check:</strong> <%= debugInfo.statusCheck || 'Status verified' %></p>
+                <p><strong>Verification Result:</strong> <span class="success-highlight"><%= debugInfo.verificationResult || 'PASSED' %></span></p>
+                <% if (debugInfo.parsedData && debugInfo.parsedData.txn_status) { %>
+                <p><strong>Received Status:</strong> <span class="info-highlight"><%= debugInfo.parsedData.txn_status %></span></p>
+                <p><strong>Expected for Success:</strong> <span class="info-highlight">100</span></p>
+                <p><strong>Status Message:</strong> <span class="success-highlight"><%= debugInfo.parsedData.txn_status_message || 'N/A' %></span></p>
+                <% } %>
+            </div>
+
+            <div class="debug-section">
+                <h4>💰 Payment Details</h4>
+                <p class="success-highlight">✅ Payment amount extracted successfully</p>
+                <p><strong>Transaction Amount:</strong> <span class="success-highlight">₹<%= debugInfo.extractedAmount || amount %></span></p>
+                <p><strong>Currency:</strong> <%= debugInfo.parsedData.currency || 'INR' %></p>
+                <% if (debugInfo.parsedData.csc_share_amount) { %>
+                <p><strong>CSC Share:</strong> ₹<%= debugInfo.parsedData.csc_share_amount %></p>
+                <% } %>
+                <% if (debugInfo.parsedData.discount && debugInfo.parsedData.discount !== '0.00') { %>
+                <p><strong>Discount:</strong> ₹<%= debugInfo.parsedData.discount %></p>
+                <% } %>
+            </div>
+
+            <% if (debugInfo.error) { %>
+            <div class="debug-section">
+                <h4>⚠️ Processing Notes</h4>
+                <p><%= debugInfo.error %></p>
+            </div>
+            <% } %>
+        </div>
+        <% } %>
+    </div>
+
+    <script>
+        function toggleContent(elementId, fullContent) {
+            const element = document.getElementById(elementId);
+            const button = element.nextElementSibling;
+            
+            if (button.textContent === 'Show Full') {
+                element.textContent = fullContent;
+                button.textContent = 'Show Less';
+            } else {
+                element.textContent = fullContent.substring(0, 100) + '...';
+                button.textContent = 'Show Full';
+            }
+        }
+
+        function toggleDebug() {
+            const debugInfo = document.getElementById('debug-info');
+            const toggleBtn = document.querySelector('.debug-toggle');
+            
+            if (debugInfo.classList.contains('hidden')) {
+                debugInfo.classList.remove('hidden');
+                toggleBtn.textContent = 'Hide Debug Info';
+            } else {
+                debugInfo.classList.add('hidden');
+                toggleBtn.textContent = 'Show Debug Info';
+            }
+        }
+    </script>
+</body>
+</html>
