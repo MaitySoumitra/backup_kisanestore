@@ -1,0 +1,50 @@
+/* General Styles */
+.top-header {
+    background-color: #3B2A84;
+    padding: 5px 15px;
+  }
+  
+  .language-button {
+    border-radius: 50px !important;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 15px !important;
+    font-weight: bold;
+  }
+  
+  .google-icon {
+    width: 30px;
+  }
+  
+  .nav-icon {
+    font-size: 20px;
+    color: white;
+  }
+  
+  .cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font-size: 10px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .language-button {
+      font-size: 12px;
+      padding: 5px 10px;
+    }
+  
+    .nav-icon {
+      font-size: 18px;
+    }
+  
+    .cart-badge {
+      top: -3px;
+      right: -3px;
+      font-size: 8px;
+    }
+  }
+  

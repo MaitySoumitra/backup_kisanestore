@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Refund Status</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .container {
+      max-width: 600px;
+      margin-top: 50px;
+      text-align: center;
+    }
+    .card {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <% if (result && result.success) { %>
+        <h3 class="text-success mb-3">Refund Processed Successfully ✅</h3>
+        <p><strong>Merchant Transaction ID:</strong> <%= result.merchant_txn %></p>
+        <p><strong>CSC Transaction ID:</strong> <%= result.csc_txn %></p>
+        <p><strong>Refund Amount:</strong> ₹<%= result.refund_amount %></p>
+        <p><strong>Refund Reason:</strong> <%= result.refund_reason %></p>
+      <% } else if (result) { %>
+        <h3 class="text-danger mb-3">Refund Failed ❌</h3>
+        <p><%= result.message || 'Unknown error occurred.' %></p>
+      <% } else { %>
+        <h3>No refund information available.</h3>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+/* ShopifyProducts.css */
+
+/* Styling for the product card */
+.product-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease-in-out;
+    background: #fff;
+}
+
+.product-card:hover {
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for the product image */
+.product-image {
+    height: 180px;
+    object-fit: contain;
+    padding: 10px;
+    background: #f8f8f8;
+}
+
+/* Styling for the product title */
+.product-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Styling for the product price */
+.product-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #28a745;
+    text-align: center;
+    margin-top: 5px;
+}

@@ -1,0 +1,179 @@
+.header-dekstop-logo {
+  max-width: 250px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid #312783;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+input.search-input.form-control {
+  border: none;
+}
+
+.search-input {
+  flex-grow: 1;
+  border: none;
+  padding: 10px;
+}
+
+.search-input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.search-btn {
+  background-color: #4aae37 !important;
+  height: 40px;
+  border-radius: 50% !important;
+  margin-left: 2px;
+  padding: 10px 15px;
+}
+
+.bulk-inquiry-btn,
+.seller-btn {
+  border-radius: 50px !important;
+  padding: 10px 20px !important;
+  font-size: 14px;
+}
+
+.bulk-inquiry-btn {
+  background-color: #4aae37 !important;
+  border-color: #4aae37 !important;
+}
+
+.seller-btn {
+  border-color: #312783 !important;
+  color: #312783 !important;
+}
+
+.nav {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.nav .nav-link {
+  margin: 0 10px;
+  text-transform: capitalize;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.nav .nav-link:hover {
+  color: #007bff;
+}
+
+hr {
+  border-top: 1px solid #ddd;
+}
+
+.offcanvas .nav-link {
+  padding: 10px 0;
+  font-size: 16px;
+}
+
+.offcanvas .nav-link:hover {
+  color: #007bff;
+}
+
+.header-container {
+  padding: 0 !important;
+  justify-content: center !important;
+}
+
+@media (max-width: 768px) {
+  .search-bar {
+    margin: 10px 0px 5px 0px;
+  }
+
+  .bulk-inquiry-btn,
+  .seller-btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .nav .nav-link {
+    text-align: center;
+    margin: 5px 0;
+  }
+
+  .search-btn {
+    width: 40px;
+  }
+  .header-mobile-logo {
+    display: none !important;
+  }
+  .header-dekstop-logo{
+    display: block !important;
+    width: 100px;
+    padding-left: 10px;
+    height:40px;
+  }
+}
+
+@media (max-width: 550px) {
+  .header-mobile-logo {
+    display: block !important;
+    max-width: 120px;
+    padding-left: 10px;
+    height:20px;
+  }
+  .header-dekstop-logo{
+    display: none !important;
+  }
+  .mobile-icon-enquiry-seller{
+    font-size: 20px;
+  }
+  .mobile-icon-enquiry-seller svg{
+    display: inline-flex;           /* Use inline-flex to ensure container size fits the icon */
+    justify-content: center;        /* Center the icon horizontally */
+    align-items: center;            /* Center the icon vertically */
+    background-color: green;
+  }
+  .icon-seller {
+    
+    color: #483285;
+   
+   display: flex;
+   
+
+  }
+  .icon-enquiry{
+
+    color: #483285;
+   display: flex;
+    border-radius: 50%;
+   
+    
+  }
+  
+  
+  .mobile-icon-enquiry-seller svg {
+    width: 24px ;                  /* Set the icon size */
+    height:auto ;  
+                   /* Set the icon size */
+  }
+  
+}
+
+.offcanvas {
+  padding: 20px;
+}
+
+.offcanvas-header {
+  border-bottom: 1px solid #ddd;
+}
+
+.toggle-header{
+    border:none !important;
+    padding:0 !important;
+    font-size: 15px !important;
+}
+
+.header-logo{
+    padding: 0 !important;
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Order Details</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f9f9f9;
+      padding: 30px;
+    }
+    .order-box {
+      background: #fff;
+      padding: 30px;
+      max-width: 700px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    .order-info p {
+      margin: 5px 0;
+    }
+    .line-item {
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+    }
+  </style>
+</head>
+<body>
+  <div class="order-box">
+    <h1>Order #<%= order.id %></h1>
+    <div class="order-info">
+      <p><strong>Customer:</strong> <%= order.customer?.email || 'N/A' %></p>
+      <p><strong>Total:</strong> ₹<%= (order.total_price || 0) %></p>
+      <p><strong>Status:</strong> <%= order.financial_status %></p>
+    </div>
+    <h3>Items:</h3>
+<% if (order.line_items && order.line_items.length > 0) { %>
+  <% order.line_items.forEach(item => { %>
+    <div class="line-item">
+      <p><strong><%= item.title %></strong></p>
+      <p>Quantity: <%= item.quantity %></p>
+      <p>Price: ₹<%= item.price %></p>
+      <p>Variant ID: <%= item.variant_id %></p>
+    </div>
+  <% }) %>
+<% } else { %>
+  <p>No items found in this order.</p>
+<% } %>
+    
+  </div>
+</body>
+</html>
